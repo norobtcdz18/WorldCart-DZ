@@ -516,9 +516,33 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-brand-green hover:bg-green-600 text-white font-black text-lg py-4 rounded-xl shadow-[0_5px_15px_rgba(46,139,87,0.3)] transition duration-300 mt-4 active:scale-95">
-                        تأكيد الطلبية
+                    <!-- ⭐ قسم الموافقة على الشروط ⭐ -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-3">
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input type="checkbox" id="agree-checkbox" required class="mt-1 w-5 h-5 rounded border-2 border-gray-300 text-brand-green focus:ring-brand-green focus:ring-2 cursor-pointer flex-shrink-0">
+                            <span class="text-sm font-bold text-gray-700 leading-relaxed">
+                                أوافق على 
+                                <button type="button" id="open-terms-btn" class="text-brand-green hover:text-green-700 underline font-black transition">
+                                    شروط وسياسات عمل المنصة
+                                </button>
+                                وأقرّ بأنني اطلعت عليها بالكامل.
+                            </span>
+                        </label>
+                        
+                        <p id="terms-warning" class="hidden text-red-500 text-xs font-bold flex items-center gap-1 pr-8">
+                            <i class="fas fa-exclamation-circle"></i>
+                            يجب الموافقة على الشروط لإتمام الطلبية
+                        </p>
+                    </div>
+
+                    <button type="submit" id="submit-order-btn" disabled class="w-full bg-gray-300 text-gray-500 font-black text-lg py-4 rounded-xl transition duration-300 mt-2 cursor-not-allowed flex items-center justify-center gap-2">
+                        <i class="fas fa-lock"></i>
+                        <span>تأكيد الطلبية</span>
                     </button>
+
+                    <p class="text-center text-[11px] text-gray-400 mt-2 font-bold">
+                        🔒 يجب قراءة شروط وسياسات عمل منصتنا والموافقة عليها لإتمام عملية الشراء
+                    </p>
                 </form>
             </div>
 
@@ -535,6 +559,112 @@
                 </button>
             </div>
 
+        </div>
+    </div>
+
+
+    <!-- 📜 نافذة سياسة شروط الاستخدام 📜 -->
+    <div id="terms-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/70 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div id="terms-overlay" class="absolute inset-0 z-0"></div>
+        
+        <div id="terms-card" class="bg-white rounded-2xl shadow-2xl w-full max-w-[550px] overflow-hidden transform scale-95 transition-transform duration-300 relative z-10 mx-auto flex flex-col max-h-[90vh]">
+            
+            <!-- الرأس -->
+            <div class="bg-brand-dark p-5 pb-6 text-center relative shadow-inner">
+                <button id="close-terms" class="absolute top-4 left-4 z-20 text-gray-400 hover:text-white transition p-2 bg-white/10 rounded-full">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+                <div class="w-14 h-14 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg border-4 border-brand-dark">
+                    <i class="fas fa-file-contract text-xl text-brand-green"></i>
+                </div>
+                <h2 class="text-xl md:text-2xl font-black text-white mt-3">شروط وسياسات العمل</h2>
+                <p class="text-gray-400 text-xs mt-1">WorldCart-DZ — آخر تحديث: 2026</p>
+            </div>
+
+            <!-- محتوى الشروط -->
+            <div class="overflow-y-auto p-5 md:p-6 space-y-3 bg-gray-50 no-scrollbar">
+                
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">1</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تلتزم المنصة بتوفير خدمة الوساطة في شراء المنتجات من المتاجر الإلكترونية العالمية وشحنها إلى الزبائن داخل الجزائر.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-red-400 shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-red-100 text-red-500 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">2</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">يُمنع استخدام المنصة في شراء أو شحن المنتجات المخالفة للقوانين أو المحظورة قانونيًا.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">3</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">لا تتحمل المنصة مسؤولية عدم توافق المنتج مع المواصفات المعروضة من قبل المورد.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">4</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تمنح المنصة ضمانات سلامة المنتج خلال مرحلة الشحن مع إمكانية طلب إرجاع المنتج في حالة وجود ضرر فيه.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-yellow-400 shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">5</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تخضع التكاليف النهائية للتعديلات الناتجة عن تقلبات أسعار الصرف في الأسواق المالية ويتم احتسابها وفق السعر المعتمد وقت تنفيذ عملية الشراء.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">6</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">يلتزم المستخدم بتعبئة جميع المعلومات الشخصية صحيحة ودقيقة عند تأكيد الطلبية.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">7</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تلتزم المنصة بحماية البيانات الشخصية للمستخدمين والحفاظ على سريتها.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">8</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">يتم تأكيد الطلبية بعد موافقة الزبون على التكلفة النهائية للمنتج وشروط الخدمة.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">9</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تلتزم المنصة بإعلام الزبون بجميع التكاليف المتعلقة بالطلب قبل تأكيد عملية الشراء.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-yellow-400 shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">10</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">لا تتحمل المنصة مسؤولية تأخر الشحنات الناتج عن الظروف اللوجستية أو الإجراءات الجمركية الخارجة عن نطاقها.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-red-400 shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-red-100 text-red-500 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">11</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تحتفظ المنصة بحق رفض أو إلغاء أي طلب يتعارض مع شروط الاستخدام أو التشريعات المعمول بها.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-brand-green shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-green-100 text-brand-green rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">12</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">تلتزم المنصة بتوفير خدمة تتبع الطلبات وإشعار الزبون بمختلف مراحل المعالجة والشحن.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl border-r-4 border-blue-400 shadow-sm flex gap-3">
+                    <div class="w-7 h-7 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-black">13</div>
+                    <p class="text-sm text-gray-700 font-bold leading-relaxed">المنصة تتعامل مع منتجات ذات الحمولة الخفيفة والمتوسطة.</p>
+                </div>
+
+                <!-- صندوق الموافقة داخل النافذة -->
+                <div class="bg-green-50 border-2 border-brand-green rounded-xl p-4 mt-4">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox" id="agree-checkbox-modal" class="w-5 h-5 rounded border-2 border-brand-green text-brand-green focus:ring-brand-green focus:ring-2 cursor-pointer">
+                        <span class="text-sm font-black text-brand-logo">☑️ أوافق على جميع الشروط والأحكام المذكورة أعلاه</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- زر الإغلاق -->
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <button id="accept-terms-btn" disabled class="w-full bg-gray-300 text-gray-500 font-black text-base py-3 rounded-xl transition duration-300 cursor-not-allowed flex items-center justify-center gap-2">
+                    <i class="fas fa-check-circle"></i>
+                    <span>قبول الشروط والعودة</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -665,15 +795,43 @@
             const orderForm = document.getElementById('order-form');
             const closeSuccessBtn = document.getElementById('close-success-btn');
 
+            // ⭐ العناصر الجديدة للشروط ⭐
+            const agreeCheckbox = document.getElementById('agree-checkbox');
+            const submitOrderBtn = document.getElementById('submit-order-btn');
+            const termsWarning = document.getElementById('terms-warning');
+            const openTermsBtn = document.getElementById('open-terms-btn');
+            const termsModal = document.getElementById('terms-modal');
+            const closeTermsBtn = document.getElementById('close-terms');
+            const termsOverlay = document.getElementById('terms-overlay');
+            const termsCard = document.getElementById('terms-card');
+            const agreeCheckboxModal = document.getElementById('agree-checkbox-modal');
+            const acceptTermsBtn = document.getElementById('accept-terms-btn');
+
+            // دالة تحديث حالة زر الإرسال
+            const updateSubmitButtonState = () => {
+                if (agreeCheckbox.checked) {
+                    submitOrderBtn.disabled = false;
+                    submitOrderBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                    submitOrderBtn.classList.add('bg-brand-green', 'hover:bg-green-600', 'text-white', 'shadow-[0_5px_15px_rgba(46,139,87,0.3)]', 'cursor-pointer');
+                    termsWarning.classList.add('hidden');
+                } else {
+                    submitOrderBtn.disabled = true;
+                    submitOrderBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                    submitOrderBtn.classList.remove('bg-brand-green', 'hover:bg-green-600', 'text-white', 'shadow-[0_5px_15px_rgba(46,139,87,0.3)]', 'cursor-pointer');
+                }
+            };
+
             // فتح استمارة الطلب
             openCheckoutBtn.addEventListener('click', () => {
-                // تصفير الواجهة للوضع الافتراضي
                 checkoutFormSection.classList.remove('hidden');
                 checkoutFormSection.classList.add('flex');
                 successSection.classList.add('hidden');
                 successSection.classList.remove('flex');
                 orderForm.reset();
-
+                
+                // إعادة تعيين حالة زر الإرسال
+                updateSubmitButtonState();
+                
                 checkoutModal.classList.remove('hidden');
                 setTimeout(() => {
                     checkoutModal.classList.remove('opacity-0');
@@ -696,15 +854,66 @@
             checkoutOverlay.addEventListener('click', closeCheckoutModal);
             closeSuccessBtn.addEventListener('click', closeCheckoutModal);
 
-            // تقديم الاستمارة وعرض رسالة "الخدمة ستتوفر قريبا"
+            // ⭐ مراقبة Checkbox الموافقة ⭐
+            agreeCheckbox.addEventListener('change', updateSubmitButtonState);
+
+            // ⭐ فتح نافذة الشروط ⭐
+            openTermsBtn.addEventListener('click', () => {
+                termsModal.classList.remove('hidden');
+                setTimeout(() => {
+                    termsModal.classList.remove('opacity-0');
+                    termsCard.classList.remove('scale-95');
+                    termsCard.classList.add('scale-100');
+                }, 10);
+            });
+
+            // إغلاق نافذة الشروط
+            const closeTermsModal = () => {
+                termsModal.classList.add('opacity-0');
+                termsCard.classList.remove('scale-100');
+                termsCard.classList.add('scale-95');
+                setTimeout(() => {
+                    termsModal.classList.add('hidden');
+                }, 300);
+            };
+
+            closeTermsBtn.addEventListener('click', closeTermsModal);
+            termsOverlay.addEventListener('click', closeTermsModal);
+
+            // ⭐ مزامنة Checkbox بين النافذتين + تفعيل زر القبول ⭐
+            agreeCheckboxModal.addEventListener('change', () => {
+                if (agreeCheckboxModal.checked) {
+                    acceptTermsBtn.disabled = false;
+                    acceptTermsBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                    acceptTermsBtn.classList.add('bg-brand-green', 'hover:bg-green-600', 'text-white', 'cursor-pointer');
+                } else {
+                    acceptTermsBtn.disabled = true;
+                    acceptTermsBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+                    acceptTermsBtn.classList.remove('bg-brand-green', 'hover:bg-green-600', 'text-white', 'cursor-pointer');
+                }
+            });
+
+            // ⭐ زر "قبول الشروط" يُفعّل الموافقة في الاستمارة ويغلق النافذة ⭐
+            acceptTermsBtn.addEventListener('click', () => {
+                if (agreeCheckboxModal.checked) {
+                    agreeCheckbox.checked = true;
+                    updateSubmitButtonState();
+                    closeTermsModal();
+                }
+            });
+
+            // تقديم الاستمارة مع التحقق من الموافقة
             orderForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // منع تحديث الصفحة
+                e.preventDefault();
                 
-                // إخفاء الاستمارة
+                if (!agreeCheckbox.checked) {
+                    termsWarning.classList.remove('hidden');
+                    return;
+                }
+                
+                // إخفاء الاستمارة وإظهار رسالة النجاح
                 checkoutFormSection.classList.add('hidden');
                 checkoutFormSection.classList.remove('flex');
-                
-                // إظهار رسالة النجاح
                 successSection.classList.remove('hidden');
                 successSection.classList.add('flex');
             });
@@ -713,3 +922,4 @@
     </script>
 </body>
 </html>
+
